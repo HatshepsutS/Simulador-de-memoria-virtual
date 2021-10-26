@@ -16,13 +16,7 @@ int binary(int n) {
     return (int)binaryint;
 }
 
-
-int* pagina[3];
-typedef struct paginas{
-    int indice;
-    int* pag;    
-}paginas;
-
+int* pagina[3][sizeMV/sizePG];
 
 
 
