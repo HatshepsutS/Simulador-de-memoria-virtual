@@ -1,9 +1,15 @@
 typedef struct pnodo
 {
-	unsigned char indice;
-	unsigned char numpag;
-	unsigned char bitprau;//bit presente o ausente
+	int indice;
+	unsigned char* numpag;
+	int bitprau;//bit presente o ausente
 } *Pag;
+
+typedef struct vnodo
+{
+	int indice;
+	unsigned char* numpag;
+} *Vir;
 
 typedef struct Nodo
 {
@@ -11,23 +17,29 @@ typedef struct Nodo
 	struct Nodo *sig;
 } *Lista;
 
-Pag conspag(unsigned char ind, unsigned char nump, unsigned char bitpa, Pag pnd)
+typedef struct Nodo2
+{
+	Vir dato;
+	struct Nodo2 *sig;
+} *Lista2;
+
+/*Pag conspag(unsigned char ind, unsigned char nump, unsigned char bitpa, Pag pnd)
 {
 	Pag p = (Pag) malloc(sizeof(struct pnodo));
 	p -> indice = ind;
 	p -> numpag = nump;
 	p -> bitprau = bitpa;
 	return p;
-}
+}*/
 
 void bitpresente(Pag pnd)
 {
-	pnd -> bitprau = '1';
+	pnd -> bitprau = 1;
 }
 
 void bitausente(Pag pnd)
 {
-	pnd -> bitprau = '0';
+	pnd -> bitprau = 0;
 }
 
 Lista vacia()
