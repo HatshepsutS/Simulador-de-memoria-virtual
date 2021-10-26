@@ -22,12 +22,12 @@ Pag conspag(unsigned char ind, unsigned char nump, unsigned char bitpa, Pag pnd)
 
 void bitpresente(Pag pnd)
 {
-	p -> bitprau = '1';
+	pnd -> bitprau = '1';
 }
 
 void bitausente(Pag pnd)
 {
-	p -> bitprau = '0';
+	pnd -> bitprau = '0';
 }
 
 Lista vacia()
