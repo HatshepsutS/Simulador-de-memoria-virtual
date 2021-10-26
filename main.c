@@ -21,7 +21,7 @@ int main(){
 
     //Creando la tabla de páginas de la memoria virtual
     int pagina[5][sizeMV/sizePG];
-    print("ID\tMemFi\tPA");
+    printf("ID\tMemFi\tPA\n");
     for(int i=0; i<(sizeMV/sizePG); i++){
         pagina[0][i]=i;
         pagina[1][i]=0;
@@ -32,7 +32,7 @@ int main(){
     }
     //Creando la tabla de marcos de la memoria física
     int marco[6][sizeMF/sizePG];
-    print("ID\tMemVi");
+    printf("ID\tMemVi\n");
     for(int j=0; j<(sizeMV/sizePG)+1; j++){
         marco[0][j]=j;
         marco[1][j]=0;
@@ -53,21 +53,21 @@ int main(){
 
     switch(select){
         case '1':
-            print("===Tabla de Paginas===");
-            print("\nIDpg\tMemFi\tPA");
+            printf("===Tabla de Paginas===");
+            printf("\nIDpg\tMemFi\tPA");
             for(int i=0; i<(sizeMV/sizePG); i++){
                 printf("%d\t%d%d%d\t%d\n",pagina[0][i],pagina[1][i],pagina[2][i],pagina[3][i],pagina[4][i]);
             }
-            print("===Tabla de Marcos===");
-            print("\nIDmr\tMemVi");
+            printf("===Tabla de Marcos===");
+            printf("\nIDmr\tMemVi");
             for(int j=0; j<(sizeMV/sizePG); j++){
                 printf("%d\t%d%d%d%d\n",marco[0][j],marco[1][j],marco[2][j],marco[3][j],marco[4][j]);
             }
             break;
         case '2':
+            printf("Ingrese el numero de la pagina se desea desea insertar a la memoria física: \n");
             int paginadesea, i=0;
             scanf("%d",&paginadesea);
-            printf("Ingrese el numero de la pagina se desea desea insertar a la memoria física: \n");
             //algoritmo de fallo de página?? si correcto la definicion?
             while(pagina[5][i]!=0){ //hasta se encuentra marco ausencia
                 i++;
