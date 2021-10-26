@@ -5,11 +5,69 @@ typedef struct pnodo
 	int bitprau;//bit presente o ausente
 } *Pag;
 
-typedef struct vnodo
-{
-	int indice;
-	unsigned char* numpag;
-} *Vir;
+
+
+
+
+
+
+typedef struct Nodo{
+    int pagina;
+    int marco;
+    struct Nodo *sig;
+} *Lista;
+
+
+Lista vacia(){return NULL;}
+
+Lista cons(int pag, int mar, Lista l){
+    Lista temp=(Lista)malloc(sizeof(struct Nodo));
+    temp->pagina =pag;
+	temp->marco =mar;
+    temp->sig=l;
+    return temp;
+}
+
+int esvacia(Lista l){return l==NULL;}
+
+int cavezapag(Lista l){return l->pagina;}
+int cavezamar(Lista l){return l->marco;}
+
+Lista resto(Lista l){return l->sig;}
+
+void ImpPag(int pagina){printf("%n",pagina);}
+void ImpMar(int marco){printf("%n",marco);}
+
+void ImpElems(Lista l){
+    if(!esvacia(l)){
+        ImpPag(cavezapag(l));
+		ImpMar(cavezamar(l));
+        ImpElems(resto(l));
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 typedef struct Nodo
 {
