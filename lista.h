@@ -3,13 +3,22 @@ typedef struct pnodo
 	unsigned char indice;
 	unsigned char numpag;
 	unsigned char bitprau;//bit presente o ausente
-} Pag;
+} *Pag;
 
 typedef struct Nodo
 {
 	Pag dato;
 	struct Nodo *sig;
 } *Lista;
+
+Pag conspag(unsigned char ind, unsigned char nump, unsigned char bitpa, Pag pnd)
+{
+	Pag p = (Pag) malloc(sizeof(struct pnodo));
+	p -> indice = ind;
+	p -> numpag = nump;
+	p -> bitprau = bitpa;
+	return p;
+}
 
 Lista vacia()
 {
