@@ -20,6 +20,16 @@ Pag conspag(unsigned char ind, unsigned char nump, unsigned char bitpa, Pag pnd)
 	return p;
 }
 
+void bitpresente(Pag pnd)
+{
+	p -> bitprau = '1';
+}
+
+void bitausente(Pag pnd)
+{
+	p -> bitprau = '0';
+}
+
 Lista vacia()
 {
 	return NULL;
