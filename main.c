@@ -5,26 +5,26 @@
 #define sizeMF 32 //tamaño de memoria física
 #define sizePG 4 //tamaño de la página
 
-unsigned char* binarycuatro(int n) {
-    unsigned char a[4];
-    system ("cls");
-    for(int i=0;n>0;i++){   
-        n%2==0 ? a[i]='0' : a[i]='1';
+int binary(int n) {
+    int binaryint;
+    for(int i=0;n>0;i++){
+        if(n%2!=0){
+          binaryint = binaryint + (int)pow(10.00,(double)(i));
+        }
         n=n/2;
     }
-    return a;
+    return (int)binaryint;
 }
 
-unsigned char* binarytres(int num) {
-    int n = num;
-    unsigned char a[3];
-    system ("cls");
-    for(int i=0;n>0;i++){   
-        n%2==0 ? a[i]='0' : a[i]='1';
-        n=n/2;
-    }
-    return a;
-}
+
+int* pagina[3];
+typedef struct paginas{
+    int indice;
+    int* pag;    
+}paginas;
+
+
+
 
 void asignarproceso(int numpagina){
     //avanza hasta encontrar bitprau == 0 con for iteración
