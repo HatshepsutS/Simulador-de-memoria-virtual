@@ -32,7 +32,7 @@ int main(){
     }
     //Creando la tabla de marcos de la memoria física
     int marco[6][sizeMF/sizePG];
-    print("ID\tMemVi");    
+    print("ID\tMemVi");
     for(int j=0; j<(sizeMV/sizePG)+1; j++){
         marco[0][j]=j;
         marco[1][j]=0;
@@ -55,19 +55,20 @@ int main(){
         case '1':
             print("===Tabla de Paginas===");
             print("\nIDpg\tMemFi\tPA");
-            for(int i=0; i<(sizeMV/sizePG); i++){            
+            for(int i=0; i<(sizeMV/sizePG); i++){
                 printf("%d\t%d%d%d\t%d\n",pagina[0][i],pagina[1][i],pagina[2][i],pagina[3][i],pagina[4][i]);
             }
             print("===Tabla de Marcos===");
-            print("\nIDmr\tMemVi");    
+            print("\nIDmr\tMemVi");
             for(int j=0; j<(sizeMV/sizePG); j++){
                 printf("%d\t%d%d%d%d\n",marco[0][j],marco[1][j],marco[2][j],marco[3][j],marco[4][j]);
             }
             break;
         case '2':
             int paginadesea, i=0;
-            printf("Ingrese el numero de la pagina se desea desea insertar a la memoria física: \n"); 
             scanf("%d",&paginadesea);
+            printf("Ingrese el numero de la pagina se desea desea insertar a la memoria física: \n");
+            //algoritmo de fallo de página?? si correcto la definicion?
             while(pagina[5][i]!=0){ //hasta se encuentra marco ausencia
                 i++;
                 if(i==sizeMF/sizePG)
@@ -90,33 +91,12 @@ int main(){
             paginadesea=paginadesea/2;
             marco[1][i] = paginadesea%2;
             break;
-        
+
         default:
             printf("\nPor favor, Elige 1 o 2\n");
-
-
     }
 
-    
-
-
-
-
-    Pag p = (Pag) malloc(sizeof(struct pnodo));
-    for(int i=0;i<(sizeMV/sizePG);i++){
-        p -> indice = i;
-        p -> numpag = "0000";
-        p -> bitprau = 0;
-        Lista ListMV=cons(p,vacia());
-    }
-
-    Vir v = (Vir) malloc(sizeof(struct vnodo));
-    for(int i=0;i<(sizeMF/sizePG);i++){
-        p -> indice = i;
-        p -> numpag = "000";
-        p -> bitprau = 0;
-        Lista ListMV=cons(p,vacia());
-    }
-
+    //caso que ya tiene marco asinado -1. activado / 2. desactivado
+    //0110100100->11010100010
 return 0;
 }
