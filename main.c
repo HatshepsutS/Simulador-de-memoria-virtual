@@ -16,14 +16,12 @@ int binary(int n){
     return (int)binaryint;
 }
 
-
 void asignarproceso(int numpagina){
+    
+
     //avanza hasta encontrar bitprau == 0 con for iteración
     
-    p -> numpag = binarycuatro(numpagina);
-    p -> bitprau = 1;
-    //si todos itprau == 1
-    
+    //si todos itprau == 1    
 }
 
 int main()
@@ -57,7 +55,12 @@ for(int j=0; j<(sizeMV/sizePG); j++){
     marco[4][j]=0;
     printf("%d\t%d%d%d%d\n",marco[0][j],marco[1][j],marco[2][j],marco[3][j],marco[4][j]);
 }
-		
+
+
+
+
+
+
 Pag p = (Pag) malloc(sizeof(struct pnodo));
 for(int i=0;i<(sizeMV/sizePG);i++){
 	p -> indice = i;
