@@ -5,7 +5,7 @@
 #define sizeMF 32 //tamaño de memoria física
 #define sizePG 4 //tamaño de la página
 
-int binary(int n) {
+int binary(int n){
     int binaryint;
     for(int i=0;n>0;i++){
         if(n%2!=0){
@@ -15,9 +15,6 @@ int binary(int n) {
     }
     return (int)binaryint;
 }
-
-int* pagina[3][sizeMV/sizePG];
-
 
 
 void asignarproceso(int numpagina){
@@ -36,6 +33,22 @@ int main()
  printf("1. Llenar la memoria RAM \n");
  printf("2. Insertar pagina a la memoria fisica\n"); 
  printf("3. Ver estado de memoria\n"); 
+
+
+int pagina[6][sizeMV/sizePG];
+
+//Creando la tabla de la memoria virtual
+for(int i=0; i<(sizeMV/sizePG); i++){
+    pagina[0][i]=i;
+    pagina[1][i]=0;
+    pagina[2][i]=0;
+    pagina[3][i]=0;
+    pagina[4][i]=0;
+    pagina[5][i]=0;
+    printf("%d  %d%d%d%d  %d\n",pagina[0][i],pagina[1][i],pagina[2][i],pagina[3][i],pagina[4][i],pagina[5][i]);
+}
+
+
 		
 Pag p = (Pag) malloc(sizeof(struct pnodo));
 for(int i=0;i<(sizeMV/sizePG);i++){
