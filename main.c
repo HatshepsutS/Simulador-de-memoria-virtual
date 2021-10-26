@@ -35,20 +35,28 @@ int main()
  printf("3. Ver estado de memoria\n"); 
 
 
-int pagina[6][sizeMV/sizePG];
-
-//Creando la tabla de la memoria virtual
+int pagina[5][sizeMV/sizePG];
+//Creando la tabla de páginas de la memoria virtual
+print("ID\tMemFi\tPA");
 for(int i=0; i<(sizeMV/sizePG); i++){
     pagina[0][i]=i;
     pagina[1][i]=0;
     pagina[2][i]=0;
     pagina[3][i]=0;
-    pagina[4][i]=0;
-    pagina[5][i]=0;
-    printf("%d  %d%d%d%d  %d\n",pagina[0][i],pagina[1][i],pagina[2][i],pagina[3][i],pagina[4][i],pagina[5][i]);
+    pagina[4][i]=0; // presente=1 , ausencia=0
+    printf("%d\t%d%d%d\t%d\n",pagina[0][i],pagina[1][i],pagina[2][i],pagina[3][i],pagina[4][i]);
 }
-
-
+int marco[5][sizeMF/sizePG];
+print("ID\tMemVi");
+//Creando la tabla de marcos de la memoria física
+for(int j=0; j<(sizeMV/sizePG); j++){
+    marco[0][j]=j;
+    marco[1][j]=0;
+    marco[2][j]=0;
+    marco[3][j]=0;
+    marco[4][j]=0;
+    printf("%d\t%d%d%d%d\n",marco[0][j],marco[1][j],marco[2][j],marco[3][j],marco[4][j]);
+}
 		
 Pag p = (Pag) malloc(sizeof(struct pnodo));
 for(int i=0;i<(sizeMV/sizePG);i++){
