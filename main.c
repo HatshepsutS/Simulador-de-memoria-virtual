@@ -81,8 +81,6 @@ int main(){
                     marinsert=0;
                     }
                     else{
-                        printf("\n\nLista pagina-marco\n");
-                        ImpList(l);
                         pripag = primerPag(l);
                         primar = primerMar(l);
                         marinsert = (marinsert+1)%8;
@@ -122,6 +120,8 @@ int main(){
                 transformacion_pagina(paginadesea,marco[6][m]);
 
             }*/
+                printf("\n\nLista pagina-marco\n");
+                ImpList(l);
 
                 printf("\n===Tabla de Paginas===");
                 printf("\nIDpg\tMemFi\tPA\n");
