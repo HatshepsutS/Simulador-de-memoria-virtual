@@ -71,8 +71,12 @@ int main(){
                 break;
             case 2:
                 printf("Ingrese el numero de la pagina se desea desea insertar a la memoria fisica: ");
-                int paginadesea, i=0, pripag, primar, marinsert;
+                int paginadesea, i=0, pripag, primar, marinsert,pd;
                 scanf("%d",&paginadesea);
+
+                pd=paginadesea;
+
+
                 if(pagina[4][paginadesea]==1)
                 //if(paginadesea==marco[6][(pagina[5][paginadesea])])
                     printf("\n***Ya la pagina %d esta en la memoria fisica***\n",paginadesea);
@@ -115,11 +119,11 @@ int main(){
                 }
 
 
-         /*for(int m=0; m<(sizeMF/sizePG); m++){
-                if(paginadesea=marco[6][m])
-                transformacion_pagina(paginadesea,marco[6][m]);
+         for(int m=0; m<(sizeMF/sizePG); m++){
+                if(pd=marco[6][m])
+                transformacion_pagina(pd,marco[0][m]);
 
-            }*/
+            }
                 printf("\n\nLista pagina-marco\n");
                 ImpList(l);
 
@@ -148,7 +152,7 @@ void transformacion_pagina(int pagina, int marco)
 	int i;
 	int bits_tabla = (int)(log10(sizeMV/sizePG)/log10(2)) +1 ;
 	int bits_marco = (int)(log10(sizeMF/sizePG)/log10(2)) +1 ;
-	int bits_direccion = (int)(log10(sizePG )/log10(2)) +1;
+	int bits_direccion = (int)(log10(sizePGBytes )/log10(2)) +1;
 
 
 	char tabla_binario[bits_tabla + 1];
@@ -173,7 +177,7 @@ void convertir_numero_binario(int numero,  char cantidad_bits, char *cadena)
 {
 	int corrimiento = 0;
 
-	for(corrimiento = cantidad_bits - 1; corrimiento >= 0; corrimiento--)
+	for(corrimiento = cantidad_bits - 1; corrimiento > 0; corrimiento--)
 	{
 		if((numero >> corrimiento) & 0x01)
 			cadena[cantidad_bits - (corrimiento + 1)] = '1';
@@ -181,6 +185,6 @@ void convertir_numero_binario(int numero,  char cantidad_bits, char *cadena)
 			cadena[cantidad_bits - (corrimiento + 1)] = '0';
 	}
 
-	cadena[cantidad_bits] = '\0';
+	cadena[cantidad_bits-1] = '\0';
 
 }
