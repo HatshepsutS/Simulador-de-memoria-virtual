@@ -6,7 +6,7 @@
 #define sizeMF 32 //tamaño de memoria física
 #define sizePG 4 //tamaño de la página
 
-int binary(int n){
+/*int binary(int n){
     int binaryint;
     for(int i=0;n>0;i++){
         if(n%2!=0){
@@ -15,85 +15,121 @@ int binary(int n){
         n=n/2;
     }
     return (int)binaryint;
-}
+}*/
 
 int main(){
 
     //Creando la tabla de páginas de la memoria virtual
-    int pagina[5][sizeMV/sizePG];
-    printf("\nID\tMemFi\tPA\n");
+    int pagina[6][sizeMV/sizePG];
+    //printf("\nID\tMemFi\tPA\n");
     for(int i=0; i<(sizeMV/sizePG); i++){
         pagina[0][i]=i;
         pagina[1][i]=0;
         pagina[2][i]=0;
         pagina[3][i]=0;
         pagina[4][i]=0; // presente=1 , ausencia=0
-        printf("%d\t%d%d%d\t%d\n",pagina[0][i],pagina[1][i],pagina[2][i],pagina[3][i],pagina[4][i]);
+        pagina[5][i]=0; //MemFi Decimal // ocultado
+        //printf("%d\t%d%d%d\t%d\t%d\n",pagina[0][i],pagina[1][i],pagina[2][i],pagina[3][i],pagina[4][i],pagina[5][i]);
     }
     //Creando la tabla de marcos de la memoria física
-    int marco[6][sizeMF/sizePG];
-    printf("\nID\tMemVi\n");
-    for(int j=0; j<(sizeMV/sizePG)+1; j++){
+    int marco[7][sizeMF/sizePG];
+    //printf("\nID\tMemVi\n");
+    for(int j=0; j<(sizeMF/sizePG); j++){
         marco[0][j]=j;
         marco[1][j]=0;
         marco[2][j]=0;
         marco[3][j]=0;
         marco[4][j]=0;
         marco[5][j]=0; //ocupado / no ocupado //ocultado
-        printf("%d\t%d%d%d%d\n",marco[0][j],marco[1][j],marco[2][j],marco[3][j],marco[4][j]);
+        marco[6][j]=0; //MemVi Decimal // ocultado
+        //printf("%d\t%d%d%d%d\t%d\t%d\n",marco[0][j],marco[1][j],marco[2][j],marco[3][j],marco[4][j],marco[5][j],marco[6][j]);
     }
+    printf("\nBienvenido al simulador de memoria virtual :) \n\n");
 
     List l=nueva(); //Lista se guarda el orden de pagina insertada
 
-    printf("Bienvenido al simulador de memoria virtual :) \n");
-    printf("1. Ver estado de memoria \n");
-    printf("2. Insertar pagina a la memoria fisica\n");
-    int select=0;
-    scanf("%d",&select);
+    while(1){
+        printf("1. Ver estado de memoria \n");
+        printf("2. Insertar pagina a la memoria fisica\n");
+        printf("Selecion: ");
+        int select=0;
+        scanf("%d",&select);
+        switch(select){
+            case 1:
+                printf("\n===Tabla de Paginas===");
+                printf("\nIDpg\tMemFi\tPA\n");
+                for(int k=0; k<(sizeMV/sizePG); k++){
+                    printf("%d\t%d%d%d\t%d\n",pagina[0][k],pagina[1][k],pagina[2][k],pagina[3][k],pagina[4][k]);
+                }
+                printf("\n===Tabla de Marcos===");
+                printf("\nIDmr\tMemVi\n");
+                for(int m=0; m<(sizeMF/sizePG); m++){
+                    printf("%d\t%d%d%d%d\n",marco[0][m],marco[1][m],marco[2][m],marco[3][m],marco[4][m]);
+                }
+                break;
+            case 2:
+                printf("Ingrese el numero de la pagina se desea desea insertar a la memoria fisica: ");
+                int paginadesea, i=0, pripag, primar, marinsert;
+                scanf("%d",&paginadesea);
+                if(pagina[4][paginadesea]==1)
+                //if(paginadesea==marco[6][(pagina[5][paginadesea])])
+                    printf("\n***Ya la pagina %d esta en la memoria virtual***\n",paginadesea);
+                else{
+                    if(esnueva(l)){
+                    marinsert=0;
+                    }
+                    else{
+                        ImpList(l);
+                        pripag = primerPag(l);
+                        printf("\nprimpag: %d\n",pripag);
+                        primar = primerMar(l);
+                        printf("\nprimar: %d\n",primar);
+                        marinsert = (marinsert+1)%8;
+                        printf("\nmarinsert: %d\n",marinsert);
+                    }                                
+                    //algoritmo de fallo de página?? si correcto la definicion?
+                    if(marco[5][marinsert]==1){
+                        pagina[4][pripag]=0; // apagando P/A
+                        l=desformar(l);
+                    }
+                    //poner en la lista, id marco, id pagina
+                    l=formar(l,paginadesea,marinsert);
 
-    switch(select){
-        case 1:
-            printf("===Tabla de Paginas===");
-            printf("\nIDpg\tMemFi\tPA\n");
-            for(int i=0; i<(sizeMF/sizePG); i++){
-                printf("%d\t%d%d%d\t%d\n",pagina[0][i],pagina[1][i],pagina[2][i],pagina[3][i],pagina[4][i]);
-            }
-            printf("===Tabla de Marcos===");
-            printf("\nIDmr\tMemVi\n");
-            for(int j=0; j<(sizeMV/sizePG); j++){
-                printf("%d\t%d%d%d%d\n",marco[0][j],marco[1][j],marco[2][j],marco[3][j],marco[4][j]);
-            }
-            break;
-        case 2:
-            printf("Ingrese el numero de la pagina se desea desea insertar a la memoria física: \n");
-            int paginadesea, i=0;
-            scanf("%d",&paginadesea);
-            //algoritmo de fallo de página?? si correcto la definicion?
-            while(pagina[5][i]!=0){ //hasta se encuentra marco ausencia
-                i++;
-                if(i==sizeMF/sizePG)
-                    break;
-            }
-            if(i==sizeMF/sizePG){ //en caso no hay marco vacio > sacando primer de la lista
-                i=0;//voy a poner al 0 de marco
-                int pripag = primerPag(l);
-                pagina[4][pripag]=0; // apagando P/A
-                l=desformar(l);
-            }
-            //poner en la lista, id marco, id pagina
-            l=formar(l,i,paginadesea);
-            //asignando id pagina en la tabla marco
-            marco[4][i] = paginadesea%2;
-            paginadesea=paginadesea/2;
-            marco[3][i] = paginadesea%2;
-            paginadesea=paginadesea/2;
-            marco[2][i] = paginadesea%2;
-            paginadesea=paginadesea/2;
-            marco[1][i] = paginadesea%2;
-            break;
+                    int marc=marinsert;
+                    pagina[4][paginadesea]= 1;
+                    pagina[5][paginadesea]= marinsert;
+                    pagina[3][paginadesea] = marc%2;
+                    marc=marc/2;
+                    pagina[2][paginadesea] = marc%2;
+                    marc=marc/2;
+                    pagina[1][paginadesea] = marc%2;
 
-        default:
-            printf("\nPor favor, Elige 1 o 2\n");
+                    marco[5][marinsert]=1;
+                    //asignando id pagina en la tabla marco
+                    marco[6][marinsert]=paginadesea;
+                    marco[4][marinsert] = paginadesea%2;
+                    paginadesea=paginadesea/2;
+                    marco[3][marinsert] = paginadesea%2;
+                    paginadesea=paginadesea/2;
+                    marco[2][marinsert] = paginadesea%2;
+                    paginadesea=paginadesea/2;
+                    marco[1][marinsert] = paginadesea%2;
+                }
+                printf("\n===Tabla de Paginas===");
+                printf("\nIDpg\tMemFi\tPA\n");
+                for(int k=0; k<(sizeMV/sizePG); k++){
+                    printf("%d\t%d%d%d\t%d\t%d\n",pagina[0][k],pagina[1][k],pagina[2][k],pagina[3][k],pagina[4][k],pagina[5][k]);
+                }
+                printf("\n===Tabla de Marcos===");
+                printf("\nIDmr\tMemVi\n");
+                for(int m=0; m<(sizeMF/sizePG); m++){
+                    printf("%d\t%d%d%d%d\t%d\t%d\n",marco[0][m],marco[1][m],marco[2][m],marco[3][m],marco[4][m],marco[5][m],marco[6][m]);
+                }
+                break;
+
+            default:
+                printf("\nPor favor, Elige 1 o 2\n");
+        }
     }
 
     //caso que ya tiene marco asinado -1. activado / 2. desactivado
