@@ -5,7 +5,7 @@
 #define sizeMV 64 //tamaño de memoria virtual
 #define sizeMF 32 //tamaño de memoria física
 #define sizePG 4 //tamaño de la página
-
+#define  sizePGBytes 4096
 /*int binary(int n){
     int binaryint;
     for(int i=0;n>0;i++){
@@ -115,6 +115,14 @@ int main(){
                     paginadesea=paginadesea/2;
                     marco[1][marinsert] = paginadesea%2;
                 }
+
+
+         for(int m=0; m<(sizeMF/sizePG); m++){
+                if(paginadesea=marco[6][m])
+                transformacion_pagina(paginadesea,marco[6][m]);
+
+            }
+
                 printf("\n===Tabla de Paginas===");
                 printf("\nIDpg\tMemFi\tPA\n");
                 for(int k=0; k<(sizeMV/sizePG); k++){
@@ -133,4 +141,47 @@ int main(){
     }
     //0110100100->11010100010
 return 0;
+}
+
+
+void transformacion_pagina(int pagina, int marco)
+{
+	int i;
+	int bits_tabla = (int)(log10(sizeMV/sizePG)/log10(2)) +1 ;
+	int bits_marco = (int)(log10(sizeMF/sizePG)/log10(2)) +1 ;
+	int bits_direccion = (int)(log10(sizePG )/log10(2)) +1;
+
+
+	char tabla_binario[bits_tabla + 1];
+	char marco_binario[bits_marco + 1];
+	char direccion_binario[bits_direccion + 1];
+
+
+	convertir_numero_binario(pagina, bits_tabla, tabla_binario);
+	convertir_numero_binario(marco, bits_marco, marco_binario);
+
+	for(i = 0; i < sizePGBytes; i++)
+	{
+		convertir_numero_binario(i, bits_direccion, direccion_binario);
+		printf("%s%s\t->\t%s%s\n", tabla_binario, direccion_binario, marco_binario, direccion_binario);
+	}
+
+
+}
+
+
+void convertir_numero_binario(int numero,  char cantidad_bits, char *cadena)
+{
+	int corrimiento = 0;
+
+	for(corrimiento = cantidad_bits - 1; corrimiento >= 0; corrimiento--)
+	{
+		if((numero >> corrimiento) & 0x01)
+			cadena[cantidad_bits - (corrimiento + 1)] = '1';
+		else
+			cadena[cantidad_bits - (corrimiento + 1)] = '0';
+	}
+
+	cadena[cantidad_bits] = '\0';
+
 }
