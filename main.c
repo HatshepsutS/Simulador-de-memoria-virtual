@@ -73,7 +73,7 @@ int main(){
                 scanf("%d",&paginadesea);
                 if(pagina[4][paginadesea]==1)
                 //if(paginadesea==marco[6][(pagina[5][paginadesea])])
-                    printf("\n***Ya la pagina %d esta en la memoria virtual***\n",paginadesea);
+                    printf("\n***Ya la pagina %d esta en la memoria fisica***\n",paginadesea);
                 else{
                     if(esnueva(l)){
                     marinsert=0;
