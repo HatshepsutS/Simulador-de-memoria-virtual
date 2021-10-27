@@ -46,12 +46,12 @@ int main(){
         marco[6][j]=0; //MemVi Decimal // ocultado
         //printf("%d\t%d%d%d%d\t%d\t%d\n",marco[0][j],marco[1][j],marco[2][j],marco[3][j],marco[4][j],marco[5][j],marco[6][j]);
     }
-    printf("\nBienvenido al simulador de memoria virtual :) \n\n");
+    printf("\nBienvenido al simulador de memoria virtual :) \n");
 
     List l=nueva(); //Lista se guarda el orden de pagina insertada
 
     while(1){
-        printf("1. Ver estado de memoria \n");
+        printf("\n1. Ver estado de memoria \n");
         printf("2. Insertar pagina a la memoria fisica\n");
         printf("Selecion: ");
         int select=0;
@@ -126,12 +126,12 @@ int main(){
                 printf("\n===Tabla de Paginas===");
                 printf("\nIDpg\tMemFi\tPA\n");
                 for(int k=0; k<(sizeMV/sizePG); k++){
-                    printf("%d\t%d%d%d\t%d\t%d\n",pagina[0][k],pagina[1][k],pagina[2][k],pagina[3][k],pagina[4][k],pagina[5][k]);
+                    printf("%d\t%d%d%d\t%d\n",pagina[0][k],pagina[1][k],pagina[2][k],pagina[3][k],pagina[4][k]);
                 }
                 printf("\n===Tabla de Marcos===");
                 printf("\nIDmr\tMemVi\n");
                 for(int m=0; m<(sizeMF/sizePG); m++){
-                    printf("%d\t%d%d%d%d\t%d\t%d\n",marco[0][m],marco[1][m],marco[2][m],marco[3][m],marco[4][m],marco[5][m],marco[6][m]);
+                    printf("%d\t%d%d%d%d\n",marco[0][m],marco[1][m],marco[2][m],marco[3][m],marco[4][m]);
                 }
                 break;
 
