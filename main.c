@@ -177,7 +177,7 @@ void convertir_numero_binario(int numero,  char cantidad_bits, char *cadena)
 {
 	int corrimiento = 0;
 
-	for(corrimiento = cantidad_bits - 1; corrimiento > 0; corrimiento--)
+	for(corrimiento = cantidad_bits - 1; corrimiento >0; corrimiento--)
 	{
 		if((numero >> corrimiento) & 0x01)
 			cadena[cantidad_bits - (corrimiento + 1)] = '1';
