@@ -150,10 +150,9 @@ return 0;
 void transformacion_pagina(int pagina, int marco)
 {
 	int i;
-	int bits_tabla = (int)(log10(sizeMV/sizePG)/log10(2)) +1 ;
-	int bits_marco = (int)(log10(sizeMF/sizePG)/log10(2)) +1 ;
-	int bits_direccion = (int)(log10(sizePGBytes )/log10(2)) +1;
-
+	int bits_tabla = (int)(log10(sizeMV/sizePG)/log10(2))  ;
+	int bits_marco = (int)(log10(sizeMF/sizePG)/log10(2)) ;
+	int bits_direccion = (int)(log10(sizePGBytes )/log10(2)) ;
 
 	char tabla_binario[bits_tabla + 1];
 	char marco_binario[bits_marco + 1];
@@ -177,7 +176,7 @@ void convertir_numero_binario(int numero,  char cantidad_bits, char *cadena)
 {
 	int corrimiento = 0;
 
-	for(corrimiento = cantidad_bits - 1; corrimiento >0; corrimiento--)
+	for(corrimiento = cantidad_bits - 1; corrimiento >=0; corrimiento--)
 	{
 		if((numero >> corrimiento) & 0x01)
 			cadena[cantidad_bits - (corrimiento + 1)] = '1';
@@ -185,6 +184,6 @@ void convertir_numero_binario(int numero,  char cantidad_bits, char *cadena)
 			cadena[cantidad_bits - (corrimiento + 1)] = '0';
 	}
 
-	cadena[cantidad_bits-1] = '\0';
+	cadena[cantidad_bits] = '\0';
 
 }
