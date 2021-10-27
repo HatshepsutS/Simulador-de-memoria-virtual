@@ -86,27 +86,27 @@ int main(){
                         printf("\nprimar: %d\n",primar);
                         marinsert = (marinsert+1)%8;
                         printf("\nmarinsert: %d\n",marinsert);
-                    }                                
-                    //algoritmo de fallo de página?? si correcto la definicion?
+                    }
+
                     if(marco[5][marinsert]==1){
-                        pagina[4][pripag]=0; // apagando P/A
+                        pagina[4][pripag]=0; // apagando P/A de la primera pagina
                         l=desformar(l);
                     }
                     //poner en la lista, id marco, id pagina
                     l=formar(l,paginadesea,marinsert);
 
                     int marc=marinsert;
-                    pagina[4][paginadesea]= 1;
-                    pagina[5][paginadesea]= marinsert;
+                    pagina[4][paginadesea] = 1;
+                    pagina[5][paginadesea] = marinsert;
                     pagina[3][paginadesea] = marc%2;
                     marc=marc/2;
                     pagina[2][paginadesea] = marc%2;
                     marc=marc/2;
                     pagina[1][paginadesea] = marc%2;
 
-                    marco[5][marinsert]=1;
+                    marco[5][marinsert] = 1;
                     //asignando id pagina en la tabla marco
-                    marco[6][marinsert]=paginadesea;
+                    marco[6][marinsert] = paginadesea;
                     marco[4][marinsert] = paginadesea%2;
                     paginadesea=paginadesea/2;
                     marco[3][marinsert] = paginadesea%2;
@@ -131,8 +131,6 @@ int main(){
                 printf("\nPor favor, Elige 1 o 2\n");
         }
     }
-
-    //caso que ya tiene marco asinado -1. activado / 2. desactivado
     //0110100100->11010100010
 return 0;
 }
