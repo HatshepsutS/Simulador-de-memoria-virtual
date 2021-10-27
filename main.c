@@ -16,7 +16,9 @@
     }
     return (int)binaryint;
 }*/
+void transformacion_pagina(int pagina, int marco);
 
+void convertir_numero_binario(int numero,  char cantidad_bits, char *cadena);
 int main(){
 
     //Creando la tabla de páginas de la memoria virtual
