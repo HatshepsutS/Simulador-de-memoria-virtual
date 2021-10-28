@@ -146,46 +146,51 @@ int main(){
 return 0;
 }
 
-
+//Esta función hace la transformacion de direcciones de pagina, recibe como parametro la pagina insertada y el id del marco
 void transformacion_pagina(int pagina, int marco)
 {
 	int i;
-	int bits_tabla = (int)(log10(sizeMV/sizePG)/log10(2))  ;
-	int bits_marco = (int)(log10(sizeMF/sizePG)/log10(2)) ;
-	int bits_direccion = (int)(log10(sizePGBytes )/log10(2)) ;
+	int bits_tabla = (int)(log10(sizeMV/sizePG)/log10(2))  ; //guardamos la cantidad de bits que tiene la tabla de pagina
+	int bits_marco = (int)(log10(sizeMF/sizePG)/log10(2)) ; //guardamos la cantidad de bits que tiene el marco de pagina
+	int bits_direccion = (int)(log10(sizePGBytes )/log10(2)) ;//guardamos los bits que tiene  la direccion de la pagina
 
+
+	//declaramos cadenas auxiliares que almacenaran en binario lo que su nombre indica
 	char tabla_binario[bits_tabla + 1];
 	char marco_binario[bits_marco + 1];
 	char direccion_binario[bits_direccion + 1];
 
-
+    /*se mandan a tratar las cadenas anteriormente declaradas a la funcion convertir_numero_binario, en este caso , estas sirven para inicializar la tabla de
+    transformacion */
 	convertir_numero_binario(pagina, bits_tabla, tabla_binario);
 	convertir_numero_binario(marco, bits_marco, marco_binario);
 
 	printf("\n\nTranformacion de las direcciones");
 	printf("\nDireccion virtual\t\tDireccion RAM\n");
-	for(i = 0; i < sizePGBytes; i++)
+	for(i = 0; i < sizePGBytes; i++) //se declara un ciclo que realizara la transformacion de las direcciones de acuerdo al tamaño de la pagina en bytes
 	{
-		convertir_numero_binario(i, bits_direccion, direccion_binario);
+		convertir_numero_binario(i, bits_direccion, direccion_binario);  //pasamos a binario las direccioens
 		printf("%s%s\t->\t%s%s\n", tabla_binario, direccion_binario, marco_binario, direccion_binario);
 	}
 
 
 }
 
-
+//Esta función la conversion de un numero decimal a binario y lo guarda en una cadena
 void convertir_numero_binario(int numero,  char cantidad_bits, char *cadena)
 {
 	int corrimiento = 0;
 
 	for(corrimiento = cantidad_bits - 1; corrimiento >=0; corrimiento--)
 	{
-		if((numero >> corrimiento) & 0x01)
-			cadena[cantidad_bits - (corrimiento + 1)] = '1';
+		if((numero >> corrimiento) & 0x01) //validamos si el numero se ha desplazado  las posiciones determinadas POR corrimiento a la derecha y es igual a uno
+            //NOTA: 0x01 es el conjunto de bits menos significativo, por lo que el valor decimal es 1.
+ 			cadena[cantidad_bits - (corrimiento + 1)] = '1'; /*al entrar en el if la cadena en la posicion de la cantidad de bits menos el
+ 			 corrimiento +1 (que vendria siendo la posicion actual) es igual a 1 */
 		else
-			cadena[cantidad_bits - (corrimiento + 1)] = '0';
+			cadena[cantidad_bits - (corrimiento + 1)] = '0';/*al no cumplir las condiciones anteriores la cadena en esa posicion es 0*/
 	}
 
-	cadena[cantidad_bits] = '\0';
+	cadena[cantidad_bits] = '\0'; //le damos un terminador a la cadena
 
 }
