@@ -183,8 +183,8 @@ void convertir_numero_binario(int numero,  char cantidad_bits, char *cadena)
 
 	for(corrimiento = cantidad_bits - 1; corrimiento >=0; corrimiento--)
 	{
-		if((numero >> corrimiento) & 0x01) //validamos si el numero se ha desplazado  bit a bit las posiciones determinadas POR corrimiento a la derecha y es igual a uno
-            //NOTA: 0x01 es el conjunto de bits menos significativo, por lo que el valor decimal es 1.
+		if((numero >> corrimiento) & 0x01) /*validamos si el numero se ha desplazado  bit a bit las posiciones determinadas POR corrimiento a la derecha y es igual a uno
+            NOTA: 0x01 es el conjunto de bits menos significativo, por lo que el valor decimal es 1.*/
  			cadena[cantidad_bits - (corrimiento + 1)] = '1'; /*al entrar en el if la cadena en la posicion de la cantidad de bits menos el
  			 corrimiento +1 (que vendria siendo la posicion actual) es igual a 1 */
 		else
