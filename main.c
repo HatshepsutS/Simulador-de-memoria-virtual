@@ -162,6 +162,8 @@ void transformacion_pagina(int pagina, int marco)
 	convertir_numero_binario(pagina, bits_tabla, tabla_binario);
 	convertir_numero_binario(marco, bits_marco, marco_binario);
 
+	printf("\n\nTranformacion de las direcciones");
+	printf("\nDireccion virtual\t\tDireccion RAM\n");
 	for(i = 0; i < sizePGBytes; i++)
 	{
 		convertir_numero_binario(i, bits_direccion, direccion_binario);
